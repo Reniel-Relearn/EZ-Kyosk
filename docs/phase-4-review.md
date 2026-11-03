@@ -2,7 +2,7 @@
 
 ## Outcome
 
-The V1 prototype is ready to merge from `prototype/phase-2` after explicit project-owner approval. No merge has been performed.
+The V1 prototype was approved and merged from `prototype/phase-2` into `main` on November 3, 2026. The merge commit is `28162ef`.
 
 ## Merge candidate
 
@@ -52,6 +52,6 @@ The browser suite covers the complete simulated order flow, the narrow-screen ca
 - No backend, POS, printer, payment, authentication, or order-management integration exists.
 - Browser support is currently verified with Playwright Chromium; physical kiosk hardware validation remains a deployment-stage activity.
 
-## Integration plan
+## Integration result
 
-After explicit approval, merge `prototype/phase-2` into `main` without squashing or rewriting existing history, run the full verification matrix on `main`, and report the resulting merge commit and repository status. Do not create a remote or deploy without separate authorization.
+The branch was merged without squashing or rewriting existing history. The unit suite, browser suite, and production build passed again on `main`. No remote repository was created and no deployment was performed.

@@ -39,7 +39,7 @@ Gate: explicit prototype approval.
 
 ## Phase 4 — Approval and baseline integration
 
-Status: implementation review and integration preparation complete. Final merge into `main` is waiting for explicit project-owner approval.
+Status: complete. The approved prototype was merged into `main` and the full verification matrix passed on the merged branch.
 
 - Review and refactor the approved prototype where needed.
 - Confirm modular boundaries and test results.
