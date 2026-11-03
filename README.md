@@ -1,6 +1,8 @@
 # EZ Kyosk
 
-EZ Kyosk is a portrait-first automated self-ordering kiosk for food and beverage establishments. The first working prototype is available on the `prototype/phase-2` branch for project-owner review. It has not been merged into `main`.
+EZ Kyosk is a portrait-first automated self-ordering kiosk for food and beverage establishments. The approved V1 prototype is merged into `main` and deployed as a public demonstration.
+
+**Live demo:** [https://reniel-relearn.github.io/EZ-Kyosk/](https://reniel-relearn.github.io/EZ-Kyosk/)
 
 ## V1 scope
 
@@ -37,7 +39,7 @@ npm run test:watch Run Vitest in watch mode
 npm run test:e2e   Run Playwright tests
 ```
 
-Playwright's Chromium browser binary should be installed when browser tests are introduced in Phase 2:
+Install Playwright's Chromium browser binary before running the local browser suite for the first time:
 
 ```powershell
 npx.cmd playwright install chromium

@@ -4,7 +4,8 @@
 
 - Repository: `https://github.com/Reniel-Relearn/EZ-Kyosk`
 - Host: GitHub Pages
-- Expected URL: `https://reniel-relearn.github.io/EZ-Kyosk/`
+- Live URL: `https://reniel-relearn.github.io/EZ-Kyosk/`
+- Status: deployed and verified on November 3, 2026
 - Database: none for V1
 
 ## Deployment behavior
