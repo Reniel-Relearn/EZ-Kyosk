@@ -1,6 +1,6 @@
 # EZ Kyosk
 
-EZ Kyosk is a portrait-first automated self-ordering kiosk for food and beverage establishments. The project is currently at the end of Phase 1: the frontend foundation is initialized, but the product prototype has not been implemented.
+EZ Kyosk is a portrait-first automated self-ordering kiosk for food and beverage establishments. The first working prototype is available on the `prototype/phase-2` branch for project-owner review. It has not been merged into `main`.
 
 ## V1 scope
 
@@ -43,5 +43,5 @@ npx.cmd playwright install chromium
 
 ## Project status
 
-Do not begin Phase 2 until the project owner explicitly says: **Proceed with prototyping.**
+Phase 2 prototype implementation is complete and awaiting UI/UX feedback. See [prototype notes](docs/prototype.md) for implemented behavior, test commands, and known limitations.
 

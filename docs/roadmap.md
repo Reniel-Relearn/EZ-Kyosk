@@ -14,6 +14,8 @@ Gate: stop and wait for **Proceed with prototyping.**
 
 ## Phase 2 — UI prototyping
 
+Status: first working prototype complete on `prototype/phase-2`; awaiting project-owner review.
+
 - Preserve the Phase 1 baseline, then work in an isolated prototype branch.
 - Establish design tokens from the approved ivory/espresso/gold direction.
 - Add separated mock catalog data.
