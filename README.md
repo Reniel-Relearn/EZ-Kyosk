@@ -43,5 +43,5 @@ npx.cmd playwright install chromium
 
 ## Project status
 
-Phase 2 prototype implementation is complete and awaiting UI/UX feedback. See [prototype notes](docs/prototype.md) for implemented behavior, test commands, and known limitations.
+The approved prototype has completed Phase 3 validation and Phase 4 integration preparation. It remains isolated on `prototype/phase-2` pending explicit approval to merge into `main`. See [prototype notes](docs/prototype.md) and the [Phase 4 review](docs/phase-4-review.md) for verification evidence and known limitations.
 

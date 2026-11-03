@@ -7,15 +7,22 @@ import { ProductCard } from './components/ProductCard';
 import { useCart } from './context/CartContext';
 import { categories, products } from './data/menu';
 import { formatPHP } from './domain/money';
+import { simulateOrderConfirmation } from './services/simulatedOrderService';
 
 export default function App() {
-  const { addItem, clearCart, itemCount, subtotalCentavos } = useCart();
+  const {
+    addItem,
+    clearCart,
+    itemCount,
+    items: cartItems,
+    subtotalCentavos,
+  } = useCart();
   const [activeCategory, setActiveCategory] = useState('best-sellers');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState('popular');
   const [cartOpen, setCartOpen] = useState(false);
   const [screen, setScreen] = useState('menu');
-  const [orderNumber, setOrderNumber] = useState('');
+  const [confirmedOrder, setConfirmedOrder] = useState(null);
 
   const visibleProducts = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase();
@@ -60,7 +67,8 @@ export default function App() {
   }
 
   function handleConfirm() {
-    setOrderNumber(`EZ-${String(Date.now()).slice(-5)}`);
+    const result = simulateOrderConfirmation(cartItems);
+    setConfirmedOrder(result.order);
     setScreen('confirmation');
   }
 
@@ -68,6 +76,7 @@ export default function App() {
     clearCart();
     setActiveCategory('best-sellers');
     setSearchQuery('');
+    setConfirmedOrder(null);
     setScreen('menu');
   }
 
@@ -79,7 +88,7 @@ export default function App() {
     return (
       <OrderConfirmation
         onStartOver={handleStartOver}
-        orderNumber={orderNumber}
+        orderNumber={confirmedOrder.id}
       />
     );
   }

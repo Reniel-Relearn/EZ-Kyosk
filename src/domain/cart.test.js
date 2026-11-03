@@ -50,5 +50,17 @@ describe('cart reducer', () => {
     const added = cartReducer(initialCartState, { type: 'add', product });
     expect(cartReducer(added, { type: 'clear' })).toEqual(initialCartState);
   });
+
+  it('does not increment beyond the safe integer range', () => {
+    const state = {
+      items: [{ ...product, quantity: Number.MAX_SAFE_INTEGER }],
+    };
+    const result = cartReducer(state, {
+      type: 'increment',
+      productId: product.id,
+    });
+
+    expect(result.items[0].quantity).toBe(Number.MAX_SAFE_INTEGER);
+  });
 });
 

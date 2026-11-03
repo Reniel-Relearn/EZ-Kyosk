@@ -445,17 +445,17 @@ h1, h2, .brand__name, .product-card__body h3, .total-row,
 
 .quantity-control {
   display: grid;
-  grid-template-columns: 32px 30px 32px;
+  grid-template-columns: 40px 34px 40px;
   align-items: center;
   border: 1px solid var(--line);
   border-radius: 999px;
 }
 
-.quantity-control button { display: grid; height: 32px; padding: 0; place-items: center; border: 0; background: transparent; }
+.quantity-control button { display: grid; height: 40px; padding: 0; place-items: center; border: 0; background: transparent; }
 .quantity-control span { text-align: center; font-size: .78rem; font-weight: 750; }
 
 .remove-button {
-  min-height: 32px;
+  min-height: 40px;
   padding: 0;
   border: 0;
   color: var(--muted);

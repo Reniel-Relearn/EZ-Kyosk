@@ -62,7 +62,9 @@ Folders should not be created until they hold real code.
 
 ### Service boundary
 
-V1 needs one small order-submission contract that returns a simulated result locally. When commercial integrations are approved, implementations can sit behind focused boundaries for:
+V1 implements one small order-submission boundary in `src/services/simulatedOrderService.js`. It constructs a validated, reusable order snapshot through `src/domain/order.js` and returns an explicitly simulated result locally. React does not construct vendor payloads or call external systems directly.
+
+When commercial integrations are approved, implementations can sit behind focused boundaries for:
 
 - POS order submission
 - Payment authorization

@@ -28,6 +28,8 @@ Gate: project-owner visual and interaction review; the first prototype is not fi
 
 ## Phase 3 — Testing and revision
 
+Status: complete. Project-owner initial review passed; expanded unit, browser-flow, and responsive validation is green.
+
 - Add focused Vitest coverage for cart, money, and order logic.
 - Add Playwright coverage for critical ordering flows and responsive UI behavior.
 - Apply targeted review feedback without unrelated redesigns.
@@ -37,6 +39,8 @@ Gate: explicit prototype approval.
 
 ## Phase 4 — Approval and baseline integration
 
+Status: implementation review and integration preparation complete. Final merge into `main` is waiting for explicit project-owner approval.
+
 - Review and refactor the approved prototype where needed.
 - Confirm modular boundaries and test results.
 - Recheck portrait and narrow-screen behavior.
@@ -45,6 +49,8 @@ Gate: explicit prototype approval.
 Gate: explicit approval before merging into `main`.
 
 ## Phase 5 — Future integrations
+
+Status: blocked on future human requirements and vendor selections; intentionally outside V1.
 
 Treat POS, payments, receipt printing, kitchen printing, persistent menu management, order tracking, and administration as separately scoped projects. Each requires its own requirements, architecture, security review, implementation plan, and tests.
 

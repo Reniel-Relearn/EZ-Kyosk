@@ -26,6 +26,15 @@ describe('money domain', () => {
     expect(() => calculateLineTotal(14900, 0)).toThrow();
   });
 
+  it('rejects totals outside the safe integer range', () => {
+    expect(() =>
+      calculateSubtotal([
+        { priceCentavos: Number.MAX_SAFE_INTEGER, quantity: 1 },
+        { priceCentavos: 1, quantity: 1 },
+      ]),
+    ).toThrow(RangeError);
+  });
+
   it('formats whole and fractional peso values', () => {
     expect(formatPHP(14900)).toContain('₱149');
     expect(formatPHP(14950)).toContain('₱149.50');

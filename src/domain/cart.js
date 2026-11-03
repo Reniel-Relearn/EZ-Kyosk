@@ -38,6 +38,18 @@ function addItem(items, product) {
   ];
 }
 
+function incrementQuantity(item) {
+  if (!Number.isSafeInteger(item.quantity) || item.quantity < 1) {
+    return item;
+  }
+
+  if (item.quantity === Number.MAX_SAFE_INTEGER) {
+    return item;
+  }
+
+  return { ...item, quantity: item.quantity + 1 };
+}
+
 export function cartReducer(state, action) {
   switch (action.type) {
     case 'add':
@@ -47,7 +59,7 @@ export function cartReducer(state, action) {
         ...state,
         items: state.items.map((item) =>
           item.id === action.productId
-            ? { ...item, quantity: item.quantity + 1 }
+            ? incrementQuantity(item)
             : item,
         ),
       };

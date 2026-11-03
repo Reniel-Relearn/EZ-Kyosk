@@ -35,5 +35,38 @@ test.describe('EZ Kyosk ordering flow', () => {
     await expect(page.getByRole('complementary', { name: 'Your order' })).toBeVisible();
     await expect(page.getByRole('button', { name: /Review Order/ })).toBeEnabled();
   });
+
+  test('supports category filtering, search, and item removal', async ({ page }) => {
+    await page.setViewportSize({ width: 1080, height: 1920 });
+    await page.goto('/');
+
+    await page.getByRole('button', { name: 'Meals' }).click();
+    await expect(page.getByRole('heading', { name: 'Meals', exact: true })).toBeVisible();
+    await page.getByRole('searchbox', { name: 'Search the menu' }).fill('tapa');
+    await expect(page.getByRole('heading', { name: 'Classic Beef Tapa' })).toBeVisible();
+    await expect(page.getByText('1 choices')).toBeVisible();
+
+    await page.getByRole('button', { name: 'Add Classic Beef Tapa to order' }).click();
+    await page.getByRole('button', { name: 'Remove' }).click();
+    await expect(page.getByRole('heading', { name: 'Your tray is waiting' })).toBeVisible();
+  });
+
+  for (const viewport of [
+    { width: 1080, height: 1920 },
+    { width: 768, height: 1024 },
+    { width: 430, height: 900 },
+  ]) {
+    test(`avoids page overflow at ${viewport.width}x${viewport.height}`, async ({ page }) => {
+      await page.setViewportSize(viewport);
+      await page.goto('/');
+
+      const dimensions = await page.evaluate(() => ({
+        clientWidth: document.documentElement.clientWidth,
+        scrollWidth: document.documentElement.scrollWidth,
+      }));
+
+      expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth);
+    });
+  }
 });
 

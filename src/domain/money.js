@@ -25,11 +25,16 @@ export function calculateSubtotal(items) {
     return 0;
   }
 
-  return items.reduce(
-    (subtotal, item) =>
-      subtotal + calculateLineTotal(item.priceCentavos, item.quantity),
-    0,
-  );
+  return items.reduce((subtotal, item) => {
+    const nextSubtotal =
+      subtotal + calculateLineTotal(item.priceCentavos, item.quantity);
+
+    if (!Number.isSafeInteger(nextSubtotal)) {
+      throw new RangeError('Subtotal exceeds the supported integer range.');
+    }
+
+    return nextSubtotal;
+  }, 0);
 }
 
 export function formatPHP(centavos) {
