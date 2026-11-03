@@ -35,13 +35,13 @@ npm.cmd test
 13 tests passed
 
 npm.cmd run test:e2e
-6 tests passed
+7 tests passed
 
 npm.cmd run build
 Production build passed
 ```
 
-The browser suite covers the complete simulated order flow, the narrow-screen cart, filtering/search/removal, and page-overflow checks at 1080 × 1920, 768 × 1024, and 430 × 900.
+The browser suite covers the complete simulated order flow, the narrow-screen cart, filtering/search/removal, five-product cart scrolling, and page-overflow checks at 1080 × 1920, 768 × 1024, and 430 × 900.
 
 ## Remaining V1 limitations
 

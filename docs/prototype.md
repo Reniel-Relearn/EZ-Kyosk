@@ -35,7 +35,7 @@ Playwright covers the complete simulated ordering journey, narrow-screen cart be
 Latest Phase 3 results:
 
 - Vitest: 4 files, 13 tests passed
-- Playwright: 6 tests passed
+- Playwright: 7 tests passed, including five-product cart scrolling
 - Responsive overflow checks: 1080 × 1920, 768 × 1024, and 430 × 900
 - Vite production build: passed
 - `git diff --check`: passed

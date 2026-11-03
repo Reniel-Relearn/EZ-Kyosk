@@ -51,6 +51,36 @@ test.describe('EZ Kyosk ordering flow', () => {
     await expect(page.getByRole('heading', { name: 'Your tray is waiting' })).toBeVisible();
   });
 
+  test('keeps a five-product order independently scrollable', async ({ page }) => {
+    await page.setViewportSize({ width: 1080, height: 800 });
+    await page.goto('/');
+
+    const addButtons = page.locator('.product-card .add-button');
+    await expect(addButtons).toHaveCount(5);
+
+    for (let index = 0; index < 5; index += 1) {
+      await addButtons.nth(index).click();
+    }
+
+    const orderItems = page.locator('.cart-panel__items');
+    const beforeScroll = await orderItems.evaluate((element) => ({
+      clientHeight: element.clientHeight,
+      scrollHeight: element.scrollHeight,
+      scrollTop: element.scrollTop,
+    }));
+
+    expect(beforeScroll.scrollHeight).toBeGreaterThan(beforeScroll.clientHeight);
+    expect(beforeScroll.scrollTop).toBe(0);
+
+    await orderItems.evaluate((element) => {
+      element.scrollTop = element.scrollHeight;
+    });
+
+    await expect(page.getByRole('heading', { name: 'Ube Cheesecake' }).last()).toBeVisible();
+    expect(await orderItems.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
+    await expect(page.getByRole('button', { name: /Review Order/ })).toBeVisible();
+  });
+
   for (const viewport of [
     { width: 1080, height: 1920 },
     { width: 768, height: 1024 },
