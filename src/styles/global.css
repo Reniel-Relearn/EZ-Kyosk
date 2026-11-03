@@ -1,0 +1,33 @@
+:root {
+  color: #342117;
+  background: #f7f1e8;
+  font-family: system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.foundation-status {
+  display: grid;
+  min-height: 100vh;
+  place-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.foundation-status h1,
+.foundation-status p {
+  margin: 0;
+}
+
+.foundation-status p {
+  margin-top: 0.75rem;
+}
+
