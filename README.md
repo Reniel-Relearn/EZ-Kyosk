@@ -8,6 +8,8 @@ V1 will provide category browsing, menu presentation, cart management, determini
 
 See [requirements](docs/requirements.md), [architecture](docs/architecture.md), and [roadmap](docs/roadmap.md) for the project baseline.
 
+The public demo deployment process is documented in [deployment notes](docs/deployment.md).
+
 ## Local setup
 
 Requirements:
