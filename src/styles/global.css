@@ -57,19 +57,17 @@ h1, h2, .brand__name, .product-card__body h3, .total-row,
 .fullscreen-button {
   position: fixed;
   z-index: 30;
-  bottom: 14px;
-  left: 14px;
+  bottom: 10px;
+  left: 10px;
   display: grid;
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
   padding: 0;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, .26);
-  border-radius: 14px;
-  color: white;
-  background: rgba(52, 33, 22, .86);
-  box-shadow: 0 8px 22px rgba(52, 33, 22, .2);
-  backdrop-filter: blur(10px);
+  border: 0;
+  border-radius: 10px;
+  color: var(--espresso-soft);
+  background: transparent;
   touch-action: manipulation;
 }
 
@@ -79,8 +77,8 @@ h1, h2, .brand__name, .product-card__body h3, .total-row,
 .fullscreen-status {
   position: fixed;
   z-index: 31;
-  bottom: 68px;
-  left: 14px;
+  bottom: 58px;
+  left: 10px;
   max-width: 250px;
   padding: 9px 12px;
   border-radius: 10px;
@@ -706,7 +704,7 @@ h1, h2, .brand__name, .product-card__body h3, .total-row,
   .product-grid { gap: 12px; }
   .product-card__body { padding: 12px; }
   .product-card__body > p { font-size: .73rem; }
-  .mobile-order-bar { right: 14px; bottom: 14px; left: 72px; }
+  .mobile-order-bar { right: 14px; bottom: 14px; left: 64px; }
   .checkout-screen__topbar > span { display: none; }
   .review-layout { padding: 38px 20px 60px; }
   .review-copy h1 { font-size: clamp(2.7rem,14vw,4rem); }

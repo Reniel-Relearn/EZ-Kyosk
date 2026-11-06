@@ -51,7 +51,7 @@ export function FullscreenButton() {
         title={label}
         type="button"
       >
-        <Icon name={isFullscreen ? 'fullscreen-exit' : 'fullscreen'} size={21} />
+        <Icon name={isFullscreen ? 'fullscreen-exit' : 'fullscreen'} size={17} />
       </button>
       {errorMessage ? (
         <span className="fullscreen-status" role="status">
