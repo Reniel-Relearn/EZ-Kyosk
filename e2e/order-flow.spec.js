@@ -1,6 +1,65 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('B1T1 Takeaway Coffee ordering flow', () => {
+  test('animates cards only when changing categories', async ({ page }) => {
+    await page.addInitScript(() => {
+      window.cardAnimations = [];
+      const animate = Element.prototype.animate;
+      Element.prototype.animate = function (keyframes, options) {
+        if (this.matches('.product-card')) {
+          window.cardAnimations.push({ keyframes, options });
+        }
+        return animate.call(this, keyframes, options);
+      };
+    });
+    await page.setViewportSize({ width: 1080, height: 1920 });
+    await page.goto('/');
+
+    const categoryButtons = page.getByRole('navigation', { name: 'Menu categories' }).getByRole('button');
+    await expect(categoryButtons.nth(1)).toHaveText('Frappe');
+    expect(await page.evaluate(() => window.cardAnimations.length)).toBe(0);
+
+    await page.getByRole('button', { name: 'Frappe', exact: true }).click();
+    const cardCount = await page.locator('.product-card').count();
+    expect(cardCount).toBe(5);
+    const animations = await page.evaluate(() => window.cardAnimations);
+    expect(animations).toHaveLength(cardCount);
+    expect(animations[0]).toMatchObject({
+      keyframes: [
+        { opacity: 0, transform: 'translateY(8px)' },
+        { opacity: 1, transform: 'translateY(0)' },
+      ],
+      options: { duration: 250 },
+    });
+
+    await page.getByRole('button', { name: 'Frappe', exact: true }).click();
+    await page.getByRole('button', { name: 'Add Strawberry Solo to order' }).click();
+    await page.getByRole('searchbox', { name: 'Search the menu' }).fill('Espresso');
+    await page.locator('.catalog').evaluate((element) => { element.scrollTop = 300; });
+    await page.getByRole('combobox', { name: 'Sort products' }).selectOption('price-low');
+    expect(await page.evaluate(() => window.cardAnimations.length)).toBe(cardCount);
+
+    await page.getByRole('searchbox', { name: 'Search the menu' }).clear();
+    await page.getByRole('button', { name: 'All', exact: true }).click();
+    expect(await page.evaluate(() => window.cardAnimations.length)).toBe(cardCount + 36);
+  });
+
+  test('does not animate category changes when reduced motion is requested', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.addInitScript(() => {
+      window.cardAnimationCount = 0;
+      const animate = Element.prototype.animate;
+      Element.prototype.animate = function (...args) {
+        if (this.matches('.product-card')) window.cardAnimationCount += 1;
+        return animate.apply(this, args);
+      };
+    });
+    await page.goto('/');
+    await page.getByRole('button', { name: 'Frappe', exact: true }).click();
+    await expect(page.locator('.product-card')).toHaveCount(5);
+    expect(await page.evaluate(() => window.cardAnimationCount)).toBe(0);
+  });
+
   test('offers a touch fullscreen toggle from the bottom-left corner', async ({ page }) => {
     await page.addInitScript(() => {
       let fullscreenElement = null;

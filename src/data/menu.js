@@ -37,10 +37,10 @@ import waffleStrawberry from '../assets/b1t1/waffle-strawberry.png';
 
 export const categories = [
   { id: 'all', label: 'All', icon: 'sparkles' },
+  { id: 'frappe', label: 'Frappe', icon: 'drink' },
   { id: 'espresso', label: 'Espresso', icon: 'coffee' },
   { id: 'matcha', label: 'Matcha', icon: 'leaf' },
   { id: 'chocolate', label: 'Chocolate', icon: 'chocolate' },
-  { id: 'frappe', label: 'Frappe', icon: 'drink' },
   { id: 'fruit-tea', label: 'Fruit Tea', icon: 'fruit-tea' },
   { id: 'donuts', label: 'Mini Donuts', icon: 'donut' },
   { id: 'waffles', label: 'Waffles', icon: 'waffle' },

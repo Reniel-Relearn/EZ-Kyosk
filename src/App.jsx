@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import b1t1Logo from './assets/b1t1/brand-logo.png';
 import { CartPanel } from './components/CartPanel';
 import { FullscreenButton } from './components/FullscreenButton';
@@ -20,6 +20,8 @@ export default function App() {
     subtotalCentavos,
   } = useCart();
   const [activeCategory, setActiveCategory] = useState('all');
+  const [categoryChange, setCategoryChange] = useState(0);
+  const productGridRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState('popular');
   const [cartOpen, setCartOpen] = useState(false);
@@ -58,6 +60,32 @@ export default function App() {
   const activeCategoryLabel = categories.find(
     (category) => category.id === activeCategory,
   )?.label;
+
+  useLayoutEffect(() => {
+    if (!categoryChange || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    const animations = Array.from(
+      productGridRef.current?.querySelectorAll('.product-card') ?? [],
+      (card) => card.animate(
+        [
+          { opacity: 0, transform: 'translateY(8px)' },
+          { opacity: 1, transform: 'translateY(0)' },
+        ],
+        { duration: 250, easing: 'ease-out' },
+      ),
+    );
+
+    return () => animations.forEach((animation) => animation.cancel());
+  }, [categoryChange]);
+
+  function handleCategoryChange(categoryId) {
+    if (categoryId !== activeCategory) {
+      setActiveCategory(categoryId);
+      setCategoryChange((count) => count + 1);
+    }
+  }
 
   function handleAdd(product, variant = null) {
     if (!variant) {
@@ -150,7 +178,7 @@ export default function App() {
               aria-current={activeCategory === category.id ? 'page' : undefined}
               className={activeCategory === category.id ? 'is-active' : ''}
               key={category.id}
-              onClick={() => setActiveCategory(category.id)}
+              onClick={() => handleCategoryChange(category.id)}
               type="button"
             >
               <Icon name={category.icon} size={27} />
@@ -203,7 +231,7 @@ export default function App() {
           </div>
 
           {visibleProducts.length > 0 ? (
-            <div className="product-grid">
+            <div className="product-grid" ref={productGridRef}>
               {visibleProducts.map((product) => (
                 <ProductCard key={product.id} onAdd={handleAdd} product={product} />
               ))}

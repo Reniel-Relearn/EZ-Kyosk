@@ -6,10 +6,10 @@ describe('B1T1 menu catalog', () => {
     expect(products).toHaveLength(36);
     expect(categories.map((category) => category.id)).toEqual([
       'all',
+      'frappe',
       'espresso',
       'matcha',
       'chocolate',
-      'frappe',
       'fruit-tea',
       'donuts',
       'waffles',
