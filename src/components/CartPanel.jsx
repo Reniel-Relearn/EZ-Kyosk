@@ -14,12 +14,14 @@ export function CartPanel({ isOpen, onClose, onReview }) {
 
   return (
     <>
-      <button
-        aria-label="Close order panel"
-        className={`cart-scrim ${isOpen ? 'is-visible' : ''}`}
-        onClick={onClose}
-        type="button"
-      />
+      {isOpen ? (
+        <button
+          aria-label="Close order panel"
+          className="cart-scrim is-visible"
+          onClick={onClose}
+          type="button"
+        />
+      ) : null}
       <aside
         aria-label="Your order"
         className={`cart-panel ${isOpen ? 'is-open' : ''}`}
@@ -44,8 +46,8 @@ export function CartPanel({ isOpen, onClose, onReview }) {
           {items.length === 0 ? (
             <div className="empty-cart">
               <div className="empty-cart__icon"><Icon name="cart" size={30} /></div>
-              <h3>Your tray is waiting</h3>
-              <p>Add something delicious and it will appear here.</p>
+              <h3>Your cup is waiting</h3>
+              <p>Choose a drink or treat and it will appear here.</p>
             </div>
           ) : (
             items.map((item) => (
@@ -53,7 +55,12 @@ export function CartPanel({ isOpen, onClose, onReview }) {
                 <img alt="" className="cart-item__image" src={item.image} />
                 <div className="cart-item__content">
                   <div className="cart-item__title-row">
-                    <h3>{item.name}</h3>
+                    <div>
+                      <h3>{item.name}</h3>
+                      {item.variantLabel ? (
+                        <p className="cart-item__variant">{item.variantLabel}</p>
+                      ) : null}
+                    </div>
                     <strong>
                       {formatPHP(calculateLineTotal(item.priceCentavos, item.quantity))}
                     </strong>
@@ -61,7 +68,7 @@ export function CartPanel({ isOpen, onClose, onReview }) {
                   <div className="cart-item__actions">
                     <div className="quantity-control">
                       <button
-                        aria-label={`Decrease ${item.name} quantity`}
+                        aria-label={`Decrease ${item.name}${item.variantLabel ? ` ${item.variantLabel}` : ''} quantity`}
                         onClick={() => decrementItem(item.id)}
                         type="button"
                       >
@@ -69,7 +76,7 @@ export function CartPanel({ isOpen, onClose, onReview }) {
                       </button>
                       <span aria-label={`${item.quantity} selected`}>{item.quantity}</span>
                       <button
-                        aria-label={`Increase ${item.name} quantity`}
+                        aria-label={`Increase ${item.name}${item.variantLabel ? ` ${item.variantLabel}` : ''} quantity`}
                         onClick={() => incrementItem(item.id)}
                         type="button"
                       >
@@ -77,6 +84,7 @@ export function CartPanel({ isOpen, onClose, onReview }) {
                       </button>
                     </div>
                     <button
+                      aria-label={`Remove ${item.name}${item.variantLabel ? ` ${item.variantLabel}` : ''} from order`}
                       className="remove-button"
                       onClick={() => removeItem(item.id)}
                       type="button"
@@ -99,7 +107,7 @@ export function CartPanel({ isOpen, onClose, onReview }) {
             <span>Total</span>
             <strong>{formatPHP(subtotalCentavos)}</strong>
           </div>
-          <p className="cart-panel__note">Taxes and fees are not applied in this prototype.</p>
+          <p className="cart-panel__note">Presentation mode · No payment will be taken.</p>
           <button
             className="primary-button"
             disabled={items.length === 0}

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test.describe('EZ Kyosk ordering flow', () => {
+test.describe('B1T1 Takeaway Coffee ordering flow', () => {
   test('offers a touch fullscreen toggle from the bottom-left corner', async ({ page }) => {
     await page.addInitScript(() => {
       let fullscreenElement = null;
@@ -52,30 +52,37 @@ test.describe('EZ Kyosk ordering flow', () => {
     await page.goto('/');
 
     await expect(
-      page.getByRole('heading', { name: 'What are you craving today?' }),
+      page.getByRole('heading', { name: 'What are you sipping today?' }),
     ).toBeVisible();
 
-    await page.getByRole('button', { name: 'Add Chicken Adobo Bowl to order' }).click();
-    await page.getByRole('button', { name: 'Add Iced Spanish Latte to order' }).click();
-    await page.getByRole('button', { name: 'Increase Chicken Adobo Bowl quantity' }).click();
+    await expect(page.locator('.product-card')).toHaveCount(36);
+    await page.getByRole('button', { name: 'Add Americano Solo to order' }).click();
+    await page.getByRole('button', { name: 'Add Americano Buy 1 Take 1 to order' }).click();
+    await page.getByRole('button', { name: 'Add Latte Solo to order' }).click();
+    await page.getByRole('button', { name: 'Increase Latte Solo · 1 cup quantity' }).click();
 
     await expect(
       page.locator('.cart-panel__footer .total-row strong'),
-    ).toHaveText('₱503');
+    ).toHaveText('₱292');
+    await expect(page.getByText('Buy 1 Take 1 · 2 cups')).toBeVisible();
     await page.getByRole('button', { name: /Review Order/ }).click();
 
     await expect(page.getByRole('heading', { name: 'Is everything just right?' })).toBeVisible();
-    await page.getByRole('button', { name: 'Confirm simulated order' }).click();
+    await expect(page.getByText('Buy 1 Take 1 · 2 cups · Quantity 1')).toBeVisible();
+    await page.getByRole('button', { name: 'Confirm presentation order' }).click();
 
-    await expect(page.getByRole('heading', { name: 'Your order looks perfect.' })).toBeVisible();
-    await expect(page.getByText('Nothing was sent to a restaurant or payment provider.', { exact: false })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Your B1T1 order looks perfect.' })).toBeVisible();
+    await expect(page.getByText('Nothing was sent to B1T1', { exact: false })).toBeVisible();
   });
 
   test('adapts the order summary to a narrow viewport', async ({ page }) => {
     await page.setViewportSize({ width: 430, height: 900 });
     await page.goto('/');
 
-    await page.getByRole('button', { name: 'Add Chicken Adobo Bowl to order' }).click();
+    await expect(
+      page.getByRole('complementary', { name: 'Your order' }),
+    ).toBeHidden();
+    await page.getByRole('button', { name: 'Add Americano Solo to order' }).click();
     await expect(page.getByRole('button', { name: 'Open your order' })).toBeVisible();
     await page.getByRole('button', { name: 'Open your order' }).click();
     await expect(page.getByRole('complementary', { name: 'Your order' })).toBeVisible();
@@ -86,26 +93,50 @@ test.describe('EZ Kyosk ordering flow', () => {
     await page.setViewportSize({ width: 1080, height: 1920 });
     await page.goto('/');
 
-    await page.getByRole('button', { name: 'Meals' }).click();
-    await expect(page.getByRole('heading', { name: 'Meals', exact: true })).toBeVisible();
-    await page.getByRole('searchbox', { name: 'Search the menu' }).fill('tapa');
-    await expect(page.getByRole('heading', { name: 'Classic Beef Tapa' })).toBeVisible();
-    await expect(page.getByText('1 choices')).toBeVisible();
+    await page.getByRole('button', { name: 'Espresso', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Espresso', exact: true })).toBeVisible();
+    await page.getByRole('searchbox', { name: 'Search the menu' }).fill('Vietnamese');
+    await expect(page.getByRole('heading', { name: 'Vietnamese' })).toBeVisible();
+    await expect(page.getByText('1 choice')).toBeVisible();
 
-    await page.getByRole('button', { name: 'Add Classic Beef Tapa to order' }).click();
-    await page.getByRole('button', { name: 'Remove' }).click();
-    await expect(page.getByRole('heading', { name: 'Your tray is waiting' })).toBeVisible();
+    await page.getByRole('button', { name: 'Add Vietnamese Buy 1 Take 1 to order' }).click();
+    await page
+      .getByRole('button', {
+        name: 'Remove Vietnamese Buy 1 Take 1 · 2 cups from order',
+      })
+      .click();
+    await expect(page.getByRole('heading', { name: 'Your cup is waiting' })).toBeVisible();
+  });
+
+  test('adds single-price waffles and labeled donut boxes', async ({ page }) => {
+    await page.setViewportSize({ width: 1080, height: 1920 });
+    await page.goto('/');
+
+    await page.getByRole('button', { name: 'Waffles', exact: true }).click();
+    await page.getByRole('button', { name: 'Add Plain Waffle to order' }).click();
+    await expect(page.locator('.cart-panel__footer .total-row strong')).toHaveText('₱58');
+
+    await page.getByRole('button', { name: 'Mini Donuts', exact: true }).click();
+    await page
+      .getByRole('button', { name: 'Add Almond Choco Mini Donuts to order' })
+      .click();
+
+    await expect(page.getByText('Box of 8', { exact: true })).toBeVisible();
+    await expect(page.locator('.cart-panel__footer .total-row strong')).toHaveText('₱256');
   });
 
   test('keeps a five-product order independently scrollable', async ({ page }) => {
     await page.setViewportSize({ width: 1080, height: 800 });
     await page.goto('/');
 
-    const addButtons = page.locator('.product-card .add-button');
-    await expect(addButtons).toHaveCount(5);
-
-    for (let index = 0; index < 5; index += 1) {
-      await addButtons.nth(index).click();
+    for (const productName of [
+      'Americano',
+      'Latte',
+      'Ube Latte',
+      'Brown Sugar',
+      'Dark Mocha Latte',
+    ]) {
+      await page.getByRole('button', { name: `Add ${productName} Solo to order` }).click();
     }
 
     const orderItems = page.locator('.cart-panel__items');
@@ -122,7 +153,7 @@ test.describe('EZ Kyosk ordering flow', () => {
       element.scrollTop = element.scrollHeight;
     });
 
-    await expect(page.getByRole('heading', { name: 'Ube Cheesecake' }).last()).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Dark Mocha Latte' }).last()).toBeVisible();
     expect(await orderItems.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
     await expect(page.getByRole('button', { name: /Review Order/ })).toBeVisible();
   });

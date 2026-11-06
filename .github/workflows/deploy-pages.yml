@@ -1,4 +1,4 @@
-name: Test and deploy EZ Kyosk to GitHub Pages
+name: Test and deploy B1T1 proposal to GitHub Pages
 
 on:
   push:

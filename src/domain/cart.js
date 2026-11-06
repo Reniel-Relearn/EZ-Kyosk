@@ -9,7 +9,12 @@ function isValidProduct(product) {
     product.id.length > 0 &&
     typeof product.name === 'string' &&
     product.name.length > 0 &&
-    isValidCentavoAmount(product.priceCentavos)
+    isValidCentavoAmount(product.priceCentavos) &&
+    (!product.productId || typeof product.productId === 'string') &&
+    (!product.variantId || typeof product.variantId === 'string') &&
+    (!product.variantLabel || typeof product.variantLabel === 'string') &&
+    (product.servingCount === undefined ||
+      (Number.isSafeInteger(product.servingCount) && product.servingCount > 0))
   );
 }
 
@@ -30,6 +35,10 @@ function addItem(items, product) {
     ...items,
     {
       id: product.id,
+      productId: product.productId ?? product.id,
+      variantId: product.variantId ?? null,
+      variantLabel: product.variantLabel ?? null,
+      servingCount: product.servingCount ?? 1,
       name: product.name,
       priceCentavos: product.priceCentavos,
       image: product.image,

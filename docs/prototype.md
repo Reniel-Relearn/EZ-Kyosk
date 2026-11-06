@@ -5,7 +5,8 @@
 - Portrait-first three-region kiosk layout based on the approved design reference
 - Responsive category navigation, including horizontal touch scrolling on narrow screens
 - Search and price/popularity sorting
-- Eight original mock menu products with project-local imagery
+- Thirty-six B1T1 Takeaway Coffee menu products with authorized project-local imagery
+- Explicit Solo and Buy 1 Take 1 drink choices stored as distinct cart lines
 - Reducer-driven cart add, increment, decrement, remove, and clear behavior
 - Integer-centavo price computation and PHP formatting
 - Empty-cart state, order subtotal, and total
@@ -34,8 +35,8 @@ Playwright covers the complete simulated ordering journey, touchscreen fullscree
 
 Latest Phase 3 results:
 
-- Vitest: 4 files, 13 tests passed
-- Playwright: 8 tests passed, including fullscreen toggling and five-product cart scrolling
+- Vitest: 5 files, 18 tests passed
+- Playwright: 9 tests passed, including fullscreen toggling, food-item coverage, and five-product cart scrolling
 - Responsive overflow checks: 1080 × 1920, 768 × 1024, and 430 × 900
 - Vite production build: passed
 - `git diff --check`: passed
@@ -45,6 +46,5 @@ Latest Phase 3 results:
 - Catalog and order state reset on refresh.
 - Confirmation is local and simulated; no order is transmitted.
 - Taxes, discounts, service charges, and payments are intentionally absent.
-- Language selection is display-only in this prototype.
 - No POS, printer, backend, or order-management integration exists.
 

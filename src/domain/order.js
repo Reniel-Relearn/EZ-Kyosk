@@ -11,6 +11,15 @@ function isValidOrderItem(item) {
     item.id.length > 0 &&
     typeof item.name === 'string' &&
     item.name.length > 0 &&
+    (item.productId === undefined || typeof item.productId === 'string') &&
+    (item.variantId === undefined ||
+      item.variantId === null ||
+      typeof item.variantId === 'string') &&
+    (item.variantLabel === undefined ||
+      item.variantLabel === null ||
+      typeof item.variantLabel === 'string') &&
+    (item.servingCount === undefined ||
+      (Number.isSafeInteger(item.servingCount) && item.servingCount > 0)) &&
     isValidCentavoAmount(item.priceCentavos) &&
     Number.isSafeInteger(item.quantity) &&
     item.quantity > 0
@@ -34,7 +43,10 @@ export function createOrderSnapshot(items, { id, createdAt }) {
   }
 
   const orderItems = items.map((item) => ({
-    productId: item.id,
+    productId: item.productId ?? item.id,
+    variantId: item.variantId ?? null,
+    variantLabel: item.variantLabel ?? null,
+    servingCount: item.servingCount ?? 1,
     name: item.name,
     unitPriceCentavos: item.priceCentavos,
     quantity: item.quantity,

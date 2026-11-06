@@ -11,15 +11,15 @@ export function OrderReview({ onBack, onConfirm }) {
         <button className="back-button" onClick={onBack} type="button">
           <Icon name="back" size={22} /> Back to menu
         </button>
-        <span>EZ Kyosk · Secure review</span>
+        <span>B1T1 Takeaway Coffee · Order review</span>
       </div>
       <div className="review-layout">
         <div className="review-copy">
           <p className="eyebrow">One last look</p>
           <h1 id="review-title">Is everything just right?</h1>
-          <p>Review your selections before placing this simulated order.</p>
+          <p>Review your B1T1 selections before confirming this presentation order.</p>
           <div className="prototype-notice">
-            <strong>Prototype mode</strong>
+            <strong>Presentation mode</strong>
             <span>No payment will be taken and no order will be sent.</span>
           </div>
         </div>
@@ -34,7 +34,10 @@ export function OrderReview({ onBack, onConfirm }) {
                 <img alt="" src={item.image} />
                 <div>
                   <h3>{item.name}</h3>
-                  <p>Quantity {item.quantity}</p>
+                  <p>
+                    {item.variantLabel ? `${item.variantLabel} · ` : ''}
+                    Quantity {item.quantity}
+                  </p>
                 </div>
                 <strong>{formatPHP(calculateLineTotal(item.priceCentavos, item.quantity))}</strong>
               </div>
@@ -45,7 +48,7 @@ export function OrderReview({ onBack, onConfirm }) {
             <strong>{formatPHP(subtotalCentavos)}</strong>
           </div>
           <button className="primary-button" onClick={onConfirm} type="button">
-            Confirm simulated order
+            Confirm presentation order
           </button>
         </div>
       </div>

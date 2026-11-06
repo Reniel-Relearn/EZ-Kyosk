@@ -1,16 +1,18 @@
-# EZ Kyosk
+# EZ Kyosk — B1T1 Proposal Demo
 
-EZ Kyosk is a portrait-first automated self-ordering kiosk for food and beverage establishments. The approved V1 prototype is merged into `main` and deployed as a public demonstration.
+EZ Kyosk is a portrait-first automated self-ordering kiosk for food and beverage establishments. The current public presentation is tailored for B1T1 Takeaway Coffee using its authorized menu branding, 36-item catalog, product photography, and Solo/Buy 1 Take 1 choices.
 
 **Live demo:** [https://reniel-relearn.github.io/EZ-Kyosk/](https://reniel-relearn.github.io/EZ-Kyosk/)
 
 ## V1 scope
 
-V1 will provide category browsing, menu presentation, cart management, deterministic PHP price calculation, an order-review step, and simulated confirmation using mock data. It will not connect to a backend, database, POS, printer, payment provider, authentication service, or live order-management system.
+V1 provides category browsing, menu presentation, cart management, deterministic PHP price calculation, an order-review step, and simulated confirmation. It does not connect to a backend, database, POS, printer, payment provider, authentication service, or live order-management system.
 
 See [requirements](docs/requirements.md), [architecture](docs/architecture.md), and [roadmap](docs/roadmap.md) for the project baseline.
 
 The public demo deployment process is documented in [deployment notes](docs/deployment.md).
+
+The B1T1 presentation scope and asset provenance are documented in [B1T1 proposal notes](docs/b1t1-proposal.md).
 
 ## Local setup
 

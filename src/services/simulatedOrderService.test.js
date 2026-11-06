@@ -6,9 +6,13 @@ describe('simulated order service', () => {
     const result = simulateOrderConfirmation(
       [
         {
-          id: 'ube-cheesecake',
-          name: 'Ube Cheesecake',
-          priceCentavos: 13900,
+          id: 'espresso-americano::b1t1',
+          productId: 'espresso-americano',
+          variantId: 'b1t1',
+          variantLabel: 'Buy 1 Take 1 · 2 cups',
+          servingCount: 2,
+          name: 'Americano',
+          priceCentavos: 8800,
           quantity: 1,
         },
       ],
@@ -16,8 +20,8 @@ describe('simulated order service', () => {
     );
 
     expect(result.status).toBe('simulated');
-    expect(result.order.id).toMatch(/^EZ-\d{6}$/);
-    expect(result.order.totalCentavos).toBe(13900);
+    expect(result.order.id).toMatch(/^B1T1-\d{6}$/);
+    expect(result.order.totalCentavos).toBe(8800);
     expect(result.order.createdAt).toBe('2026-11-03T06:00:00.123Z');
   });
 });

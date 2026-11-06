@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
+import b1t1Logo from './assets/b1t1/brand-logo.png';
 import { CartPanel } from './components/CartPanel';
 import { FullscreenButton } from './components/FullscreenButton';
-import { BrandMark, Icon } from './components/Icon';
+import { Icon } from './components/Icon';
 import { OrderConfirmation } from './components/OrderConfirmation';
 import { OrderReview } from './components/OrderReview';
 import { ProductCard } from './components/ProductCard';
@@ -18,7 +19,7 @@ export default function App() {
     items: cartItems,
     subtotalCentavos,
   } = useCart();
-  const [activeCategory, setActiveCategory] = useState('best-sellers');
+  const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState('popular');
   const [cartOpen, setCartOpen] = useState(false);
@@ -29,8 +30,8 @@ export default function App() {
     const normalizedQuery = searchQuery.trim().toLowerCase();
     const filtered = products.filter((product) => {
       const categoryMatches =
-        activeCategory === 'best-sellers'
-          ? product.featured
+        activeCategory === 'all'
+          ? true
           : product.categoryId === activeCategory;
       const searchMatches =
         !normalizedQuery ||
@@ -58,8 +59,28 @@ export default function App() {
     (category) => category.id === activeCategory,
   )?.label;
 
-  function handleAdd(product) {
-    addItem(product);
+  function handleAdd(product, variant = null) {
+    if (!variant) {
+      addItem({
+        ...product,
+        productId: product.id,
+        variantLabel: product.categoryId === 'donuts' ? 'Box of 8' : null,
+      });
+      return;
+    }
+
+    addItem({
+      id: `${product.id}::${variant.id}`,
+      productId: product.id,
+      variantId: variant.id,
+      variantLabel: `${variant.label} · ${variant.servingCount} ${
+        variant.servingCount === 1 ? 'cup' : 'cups'
+      }`,
+      servingCount: variant.servingCount,
+      name: product.name,
+      priceCentavos: variant.priceCentavos,
+      image: product.image,
+    });
   }
 
   function handleReview() {
@@ -75,7 +96,7 @@ export default function App() {
 
   function handleStartOver() {
     clearCart();
-    setActiveCategory('best-sellers');
+    setActiveCategory('all');
     setSearchQuery('');
     setConfirmedOrder(null);
     setScreen('menu');
@@ -99,14 +120,19 @@ export default function App() {
       <div className="kiosk-shell">
       <header className="topbar">
         <div className="brand">
-          <BrandMark />
-          <div className="brand__name">EZ Kyosk</div>
-          <div className="brand__tagline">A little pause, beautifully served.</div>
+          <img
+            alt="B1T1 Takeaway Coffee"
+            className="brand-logo"
+            src={b1t1Logo}
+          />
+          <div className="brand__tagline">More flavor. More value. Just great coffee.</div>
         </div>
         <div className="topbar__actions">
-          <span className="language-label">English</span>
+          <span className="language-label">Presentation menu</span>
           <button
-            aria-label={`Open order with ${itemCount} items`}
+            aria-label={`Open order with ${itemCount} ${
+              itemCount === 1 ? 'selection' : 'selections'
+            }`}
             className="header-cart-button"
             onClick={() => setCartOpen(true)}
             type="button"
@@ -136,9 +162,9 @@ export default function App() {
 
         <main className="catalog">
           <div className="catalog__intro">
-            <p className="eyebrow">Welcome to EZ Kyosk</p>
-            <h1>What are you craving today?</h1>
-            <p>Explore familiar favorites, thoughtfully prepared.</p>
+            <p className="eyebrow">B1T1 Takeaway Coffee</p>
+            <h1>What are you sipping today?</h1>
+            <p>Premium-inspired brews, made accessible. Coffee starts at ₱48.</p>
           </div>
 
           <div className="catalog-tools">
@@ -170,7 +196,10 @@ export default function App() {
               <p className="eyebrow">Curated for you</p>
               <h2>{activeCategoryLabel}</h2>
             </div>
-            <span>{visibleProducts.length} choices</span>
+            <span>
+              {visibleProducts.length}{' '}
+              {visibleProducts.length === 1 ? 'choice' : 'choices'}
+            </span>
           </div>
 
           {visibleProducts.length > 0 ? (

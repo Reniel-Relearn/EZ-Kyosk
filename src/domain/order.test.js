@@ -3,15 +3,15 @@ import { createOrderSnapshot } from './order';
 
 const items = [
   {
-    id: 'chicken-adobo-bowl',
-    name: 'Chicken Adobo Bowl',
-    priceCentavos: 17900,
+    id: 'espresso-americano',
+    name: 'Americano',
+    priceCentavos: 4800,
     quantity: 2,
   },
   {
-    id: 'iced-spanish-latte',
-    name: 'Iced Spanish Latte',
-    priceCentavos: 14500,
+    id: 'espresso-latte',
+    name: 'Latte',
+    priceCentavos: 7800,
     quantity: 1,
   },
 ];
@@ -19,29 +19,55 @@ const items = [
 describe('order snapshot', () => {
   it('creates a reusable order structure with derived totals', () => {
     const order = createOrderSnapshot(items, {
-      id: 'EZ-123456',
+      id: 'B1T1-123456',
       createdAt: '2026-11-03T06:00:00.000Z',
     });
 
     expect(order).toMatchObject({
-      id: 'EZ-123456',
+      id: 'B1T1-123456',
       currency: 'PHP',
-      subtotalCentavos: 50300,
-      totalCentavos: 50300,
+      subtotalCentavos: 17400,
+      totalCentavos: 17400,
     });
-    expect(order.items[0].lineTotalCentavos).toBe(35800);
+    expect(order.items[0].lineTotalCentavos).toBe(9600);
+  });
+
+  it('preserves B1T1 variant identity in the reusable order structure', () => {
+    const order = createOrderSnapshot(
+      [
+        {
+          id: 'espresso-americano::b1t1',
+          productId: 'espresso-americano',
+          variantId: 'b1t1',
+          variantLabel: 'Buy 1 Take 1 · 2 cups',
+          servingCount: 2,
+          name: 'Americano',
+          priceCentavos: 8800,
+          quantity: 1,
+        },
+      ],
+      { id: 'B1T1-123456', createdAt: '2026-11-03T06:00:00.000Z' },
+    );
+
+    expect(order.items[0]).toMatchObject({
+      productId: 'espresso-americano',
+      variantId: 'b1t1',
+      variantLabel: 'Buy 1 Take 1 · 2 cups',
+      servingCount: 2,
+      lineTotalCentavos: 8800,
+    });
   });
 
   it('rejects empty or invalid order data', () => {
     expect(() =>
       createOrderSnapshot([], {
-        id: 'EZ-123456',
+        id: 'B1T1-123456',
         createdAt: '2026-11-03T06:00:00.000Z',
       }),
     ).toThrow();
     expect(() =>
       createOrderSnapshot([{ ...items[0], quantity: 0 }], {
-        id: 'EZ-123456',
+        id: 'B1T1-123456',
         createdAt: '2026-11-03T06:00:00.000Z',
       }),
     ).toThrow();

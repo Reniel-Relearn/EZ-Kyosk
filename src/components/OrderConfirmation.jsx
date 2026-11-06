@@ -7,11 +7,11 @@ export function OrderConfirmation({ orderNumber, onStartOver }) {
         <div className="confirmation-card__check">
           <Icon name="check" size={42} strokeWidth={2} />
         </div>
-        <p className="eyebrow">Simulated confirmation</p>
-        <h1 id="confirmation-title">Your order looks perfect.</h1>
+        <p className="eyebrow">B1T1 presentation confirmation</p>
+        <h1 id="confirmation-title">Your B1T1 order looks perfect.</h1>
         <p>
-          This prototype created a local order preview only. Nothing was sent to a
-          restaurant or payment provider.
+          This presentation created a local order preview only. Nothing was sent to
+          B1T1, a payment provider, or a live ordering system.
         </p>
         <div className="confirmation-card__number">
           <span>Preview number</span>
