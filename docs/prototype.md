@@ -30,12 +30,12 @@ npm.cmd run test:e2e
 npm.cmd run build
 ```
 
-Playwright covers the complete simulated ordering journey, narrow-screen cart behavior, menu filtering and removal, and portrait overflow checks.
+Playwright covers the complete simulated ordering journey, touchscreen fullscreen control, narrow-screen cart behavior, menu filtering and removal, and portrait overflow checks.
 
 Latest Phase 3 results:
 
 - Vitest: 4 files, 13 tests passed
-- Playwright: 7 tests passed, including five-product cart scrolling
+- Playwright: 8 tests passed, including fullscreen toggling and five-product cart scrolling
 - Responsive overflow checks: 1080 × 1920, 768 × 1024, and 430 × 900
 - Vite production build: passed
 - `git diff --check`: passed

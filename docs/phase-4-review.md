@@ -35,7 +35,7 @@ npm.cmd test
 13 tests passed
 
 npm.cmd run test:e2e
-7 tests passed
+8 tests passed
 
 npm.cmd run build
 Production build passed

@@ -1,6 +1,52 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('EZ Kyosk ordering flow', () => {
+  test('offers a touch fullscreen toggle from the bottom-left corner', async ({ page }) => {
+    await page.addInitScript(() => {
+      let fullscreenElement = null;
+
+      Object.defineProperty(Document.prototype, 'fullscreenElement', {
+        configurable: true,
+        get: () => fullscreenElement,
+      });
+      Object.defineProperty(Element.prototype, 'requestFullscreen', {
+        configurable: true,
+        value: async function requestFullscreen() {
+          fullscreenElement = this;
+          document.dispatchEvent(new Event('fullscreenchange'));
+        },
+      });
+      Object.defineProperty(Document.prototype, 'exitFullscreen', {
+        configurable: true,
+        value: async () => {
+          fullscreenElement = null;
+          document.dispatchEvent(new Event('fullscreenchange'));
+        },
+      });
+    });
+
+    await page.setViewportSize({ width: 1080, height: 1920 });
+    await page.goto('/');
+
+    const enterButton = page.getByRole('button', { name: 'Enter fullscreen' });
+    await expect(enterButton).toBeVisible();
+    await expect(enterButton).toHaveCSS('position', 'fixed');
+
+    const position = await enterButton.boundingBox();
+    expect(position.x).toBeLessThan(20);
+    expect(position.y + position.height).toBeGreaterThan(1900);
+
+    await enterButton.click();
+    const exitButton = page.getByRole('button', { name: 'Exit fullscreen' });
+    await expect(exitButton).toHaveAttribute('aria-pressed', 'true');
+
+    await exitButton.click();
+    await expect(page.getByRole('button', { name: 'Enter fullscreen' })).toHaveAttribute(
+      'aria-pressed',
+      'false',
+    );
+  });
+
   test('creates, reviews, and confirms a simulated order', async ({ page }) => {
     await page.setViewportSize({ width: 1080, height: 1920 });
     await page.goto('/');

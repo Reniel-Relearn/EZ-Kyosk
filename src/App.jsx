@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { CartPanel } from './components/CartPanel';
+import { FullscreenButton } from './components/FullscreenButton';
 import { BrandMark, Icon } from './components/Icon';
 import { OrderConfirmation } from './components/OrderConfirmation';
 import { OrderReview } from './components/OrderReview';
@@ -80,21 +81,22 @@ export default function App() {
     setScreen('menu');
   }
 
-  if (screen === 'review') {
-    return <OrderReview onBack={() => setScreen('menu')} onConfirm={handleConfirm} />;
-  }
+  let screenContent;
 
-  if (screen === 'confirmation') {
-    return (
+  if (screen === 'review') {
+    screenContent = (
+      <OrderReview onBack={() => setScreen('menu')} onConfirm={handleConfirm} />
+    );
+  } else if (screen === 'confirmation') {
+    screenContent = (
       <OrderConfirmation
         onStartOver={handleStartOver}
         orderNumber={confirmedOrder.id}
       />
     );
-  }
-
-  return (
-    <div className="kiosk-shell">
+  } else {
+    screenContent = (
+      <div className="kiosk-shell">
       <header className="topbar">
         <div className="brand">
           <BrandMark />
@@ -203,7 +205,15 @@ export default function App() {
         <span>View order</span>
         <strong>{formatPHP(subtotalCentavos)}</strong>
       </button>
-    </div>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {screenContent}
+      <FullscreenButton />
+    </>
   );
 }
 

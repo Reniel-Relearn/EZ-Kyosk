@@ -11,6 +11,8 @@ const iconPaths = {
   close: <path d="m6 6 12 12M18 6 6 18" />,
   back: <path d="m15 18-6-6 6-6" />,
   check: <path d="m5 12 4 4L19 6" />,
+  fullscreen: <path d="M8 3H3v5m13-5h5v5M8 21H3v-5m13 5h5v-5" />,
+  'fullscreen-exit': <path d="M3 8h5V3m8 5h5V3M3 16h5v5m8-5h5v5" />,
 };
 
 export function Icon({ name, size = 24, strokeWidth = 1.8 }) {

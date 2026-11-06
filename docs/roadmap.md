@@ -54,3 +54,8 @@ Status: blocked on future human requirements and vendor selections; intentionall
 
 Treat POS, payments, receipt printing, kitchen printing, persistent menu management, order tracking, and administration as separately scoped projects. Each requires its own requirements, architecture, security review, implementation plan, and tests.
 
+## Testing hardening follow-up
+
+- Remove Vitest's `--passWithNoTests` and Playwright's `--pass-with-no-tests` flags so CI fails if test discovery breaks or the test files are removed.
+- Add coverage thresholds and run Playwright against the production build artifact.
+
