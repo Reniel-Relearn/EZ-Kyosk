@@ -14,6 +14,8 @@ The public demo deployment process is documented in [deployment notes](docs/depl
 
 The B1T1 presentation scope and asset provenance are documented in [B1T1 proposal notes](docs/b1t1-proposal.md).
 
+After confirming an order, scan its QR with a phone camera to open the actual selected items and simulated progress. The default demo reaches Preparing at 5 seconds and Ready for pickup at 30 seconds from confirmation. An optional busy-queue presentation runs for 60 seconds. See [QR tracking notes](docs/qr-tracking.md) for timings, testing, and limitations.
+
 ## Local setup
 
 Requirements:

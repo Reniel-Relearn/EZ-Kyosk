@@ -11,6 +11,7 @@
 - Integer-centavo price computation and PHP formatting
 - Empty-cart state, order subtotal, and total
 - Order-review screen and explicitly simulated confirmation
+- Scannable QR confirmation and mobile order tracking with automatic presentation timelines
 - Narrow-screen cart drawer with a persistent order action
 - Keyboard focus indicators, accessible labels, reduced-motion support, and semantic landmarks
 
@@ -33,17 +34,17 @@ npm.cmd run build
 
 Playwright covers the complete simulated ordering journey, touchscreen fullscreen control, narrow-screen cart behavior, menu filtering and removal, and portrait overflow checks.
 
-Latest Phase 3 results:
+Latest verification results (including the QR presentation feature):
 
-- Vitest: 5 files, 18 tests passed
-- Playwright: 9 tests passed, including fullscreen toggling, food-item coverage, and five-product cart scrolling
+- Vitest: 6 files, 47 tests passed
+- Playwright: 18 tests passed, including rendered QR decoding, fresh-device tracking, timing, category animations, fullscreen toggling, food-item coverage, and five-product cart scrolling
 - Responsive overflow checks: 1080 × 1920, 768 × 1024, and 430 × 900
 - Vite production build: passed
 - `git diff --check`: passed
 
 ## Prototype limitations
 
-- Catalog and order state reset on refresh.
+- The kiosk cart resets on refresh. A tracking link retains its encoded order snapshot and confirmation timestamp.
 - Confirmation is local and simulated; no order is transmitted.
 - Taxes, discounts, service charges, and payments are intentionally absent.
 - No POS, printer, backend, or order-management integration exists.

@@ -56,6 +56,10 @@ Treat POS, payments, receipt printing, kitchen printing, persistent menu managem
 
 ## Testing hardening follow-up
 
-- Remove Vitest's `--passWithNoTests` and Playwright's `--pass-with-no-tests` flags so CI fails if test discovery breaks or the test files are removed.
+- Completed: removed Vitest's `--passWithNoTests` and Playwright's `--pass-with-no-tests` flags so CI fails if no tests are discovered.
 - Add coverage thresholds and run Playwright against the production build artifact.
+
+## QR tracking presentation
+
+Implemented: QR confirmation, a mobile page carrying the actual selected order, and automatic simulated progress. The default first-in-line timeline lasts 30 seconds; an optional three-order sample queue lasts 60 seconds. See [QR tracking notes](qr-tracking.md). Real shared queues and staff/POS updates remain separately scoped future integrations.
 

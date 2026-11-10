@@ -140,7 +140,7 @@ export default function App() {
     screenContent = (
       <OrderConfirmation
         onStartOver={handleStartOver}
-        orderNumber={confirmedOrder.id}
+        order={confirmedOrder}
       />
     );
   } else {
