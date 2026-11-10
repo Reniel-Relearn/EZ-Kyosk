@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import logo from '../assets/b1t1/brand-logo.png';
+import logo from '../assets/b1t1/optimized/brand-logo.webp';
 import { products } from '../data/menu';
 import { formatPHP } from '../domain/money';
 import { getTrackingProgress, readTrackingToken } from '../domain/tracking';
@@ -33,7 +33,7 @@ export function OrderTracking({ token }) {
     return (
       <main className="tracking-screen">
         <div className="tracking-page">
-          <img alt="B1T1 Takeaway Coffee" className="tracking-logo" src={logo} />
+          <img alt="B1T1 Takeaway Coffee" className="tracking-logo" decoding="async" height="69" src={logo} width="640" />
           <section className="tracking-surface tracking-error">
             <p className="eyebrow">Order tracking</p>
             <h1>This link isn’t available.</h1>
@@ -53,7 +53,7 @@ export function OrderTracking({ token }) {
     <main className="tracking-screen">
       <div className="tracking-page">
         <header className="tracking-header">
-          <img alt="B1T1 Takeaway Coffee" className="tracking-logo" src={logo} />
+          <img alt="B1T1 Takeaway Coffee" className="tracking-logo" decoding="async" height="69" src={logo} width="640" />
           <span className="demo-pill">Presentation demo</span>
         </header>
         <section className={`tracking-surface tracking-status ${ready ? 'is-ready' : ''}`}>

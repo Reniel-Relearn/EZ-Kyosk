@@ -1,17 +1,21 @@
 import { formatPHP } from '../domain/money';
 import { Icon } from './Icon';
+import { ProductImage } from './ProductImage';
 
-export function ProductCard({ product, onAdd }) {
+export function ProductCard({ product, onAdd, priority = false, fetchPriority = 'auto' }) {
   const hasVariants = Array.isArray(product.variants) && product.variants.length > 0;
 
   return (
     <article className="product-card">
       <div className="product-card__image-wrap">
-        <img
+        <ProductImage
           alt={product.name}
           className="product-card__image"
-          loading="lazy"
+          fetchPriority={fetchPriority}
+          priority={priority}
+          sizes="(max-width: 460px) calc(100vw - 56px), (max-width: 680px) calc((100vw - 84px) / 2), (max-width: 960px) calc((100vw - 214px) / 2), calc((100vw - 570px) / 2)"
           src={product.image}
+          srcSet={`${product.image} 400w, ${product.imageLarge} 800w`}
         />
         {hasVariants && <span className="product-card__badge">B1T1 available</span>}
       </div>

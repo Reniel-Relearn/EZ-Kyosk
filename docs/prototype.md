@@ -14,6 +14,7 @@
 - Scannable QR confirmation and mobile order tracking with automatic presentation timelines
 - Narrow-screen cart drawer with a persistent order action
 - Keyboard focus indicators, accessible labels, reduced-motion support, and semantic landmarks
+- Responsive WebP photos with eager first-screen loading, static placeholders, and failed-image fallbacks
 
 ## Local preview
 
@@ -37,7 +38,7 @@ Playwright covers the complete simulated ordering journey, touchscreen fullscree
 Latest verification results (including the QR presentation feature):
 
 - Vitest: 6 files, 47 tests passed
-- Playwright: 18 tests passed, including rendered QR decoding, fresh-device tracking, timing, category animations, fullscreen toggling, food-item coverage, and five-product cart scrolling
+- Playwright: 22 production-build tests passed, including image loading/failures, rendered QR decoding, fresh-device tracking, timing, category animations, fullscreen toggling, food-item coverage, and five-product cart scrolling
 - Responsive overflow checks: 1080 × 1920, 768 × 1024, and 430 × 900
 - Vite production build: passed
 - `git diff --check`: passed

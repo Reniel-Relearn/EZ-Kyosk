@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import logo from '../assets/b1t1/brand-logo.png';
+import logo from '../assets/b1t1/optimized/brand-logo.webp';
 import { products } from '../data/menu';
 import { createTrackingUrl } from '../domain/tracking';
 import { Icon } from './Icon';
@@ -17,7 +17,7 @@ export function OrderConfirmation({ order, onStartOver }) {
   return (
     <section aria-labelledby="confirmation-title" className="confirmation-screen">
       <div className="confirmation-card confirmation-card--qr">
-        <img alt="B1T1 Takeaway Coffee" className="confirmation-logo" src={logo} />
+        <img alt="B1T1 Takeaway Coffee" className="confirmation-logo" decoding="async" height="69" src={logo} width="640" />
         <div className="confirmation-card__check">
           <Icon name="check" size={42} strokeWidth={2} />
         </div>

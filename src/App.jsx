@@ -1,5 +1,5 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
-import b1t1Logo from './assets/b1t1/brand-logo.png';
+import b1t1Logo from './assets/b1t1/optimized/brand-logo.webp';
 import { CartPanel } from './components/CartPanel';
 import { FullscreenButton } from './components/FullscreenButton';
 import { Icon } from './components/Icon';
@@ -151,7 +151,10 @@ export default function App() {
           <img
             alt="B1T1 Takeaway Coffee"
             className="brand-logo"
+            decoding="async"
+            height="69"
             src={b1t1Logo}
+            width="640"
           />
           <div className="brand__tagline">More flavor. More value. Just great coffee.</div>
         </div>
@@ -232,8 +235,9 @@ export default function App() {
 
           {visibleProducts.length > 0 ? (
             <div className="product-grid" ref={productGridRef}>
-              {visibleProducts.map((product) => (
-                <ProductCard key={product.id} onAdd={handleAdd} product={product} />
+              {visibleProducts.map((product, index) => (
+                <ProductCard key={product.id} onAdd={handleAdd} product={product}
+                  priority={index < 6} fetchPriority={index === 0 ? 'high' : 'auto'} />
               ))}
             </div>
           ) : (

@@ -2,7 +2,7 @@
 
 ## Phase 1 — Understanding and initialization
 
-Status: complete when the recorded verification commands pass.
+Status: complete. The foundation was initialized and its verification commands passed.
 
 - Inspect the workspace, Git state, design reference, and development toolchain.
 - Establish the React/Vite project foundation.
@@ -14,7 +14,7 @@ Gate: stop and wait for **Proceed with prototyping.**
 
 ## Phase 2 — UI prototyping
 
-Status: first working prototype complete on `prototype/phase-2`; awaiting project-owner review.
+Status: complete. The project owner reviewed and approved the prototype, which was integrated into `main`.
 
 - Preserve the Phase 1 baseline, then work in an isolated prototype branch.
 - Establish design tokens from the approved ivory/espresso/gold direction.
@@ -57,9 +57,20 @@ Treat POS, payments, receipt printing, kitchen printing, persistent menu managem
 ## Testing hardening follow-up
 
 - Completed: removed Vitest's `--passWithNoTests` and Playwright's `--pass-with-no-tests` flags so CI fails if no tests are discovered.
-- Add coverage thresholds and run Playwright against the production build artifact.
+- Implemented: Playwright builds the production site and tests that artifact through Vite preview, including the `/EZ-Kyosk/` base path. CI deploys the same tested artifact.
+- Optional engineering follow-up: add meaningful coverage thresholds for domain logic.
 
 ## QR tracking presentation
 
 Implemented: QR confirmation, a mobile page carrying the actual selected order, and automatic simulated progress. The default first-in-line timeline lasts 30 seconds; an optional three-order sample queue lasts 60 seconds. See [QR tracking notes](qr-tracking.md). Real shared queues and staff/POS updates remain separately scoped future integrations.
+
+## Presentation image performance
+
+Implemented: compact and large WebP product images, a resized lossless logo, eager loading for the first six products, responsive image selection, static loading placeholders, and failed-photo fallbacks. Original assets are retained as conversion sources. See [performance notes](performance.md).
+
+## Presentation acceptance still requiring hardware
+
+- Validate cold loading, fullscreen, touch scrolling, and QR scanning on the actual SUNMI device and a phone.
+- An automatic abandoned-cart reset is an optional behavior change, not an implemented requirement; its timing and warning need project-owner selection before implementation.
+- A browser test pass does not certify the hardware or convert simulated tracking into a live shared queue.
 

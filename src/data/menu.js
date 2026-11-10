@@ -1,39 +1,43 @@
-import chocolateClassic from '../assets/b1t1/chocolate-classic.png';
-import chocolateWhite from '../assets/b1t1/chocolate-white.png';
-import donutAlmondChoco from '../assets/b1t1/donut-almond-choco.png';
-import donutMilkMatcha from '../assets/b1t1/donut-milk-matcha.png';
-import donutStrawberry from '../assets/b1t1/donut-strawberry.png';
-import espressoAmericano from '../assets/b1t1/espresso-americano.png';
-import espressoBrownSugar from '../assets/b1t1/espresso-brown-sugar.png';
-import espressoCaramelMacchiato from '../assets/b1t1/espresso-caramel-macchiato.png';
-import espressoDarkMochaLatte from '../assets/b1t1/espresso-dark-mocha-latte.png';
-import espressoFerreroLatte from '../assets/b1t1/espresso-ferrero-latte.png';
-import espressoLatte from '../assets/b1t1/espresso-latte.png';
-import espressoSpanishLatte from '../assets/b1t1/espresso-spanish-latte.png';
-import espressoUbeLatte from '../assets/b1t1/espresso-ube-latte.png';
-import espressoVietnamese from '../assets/b1t1/espresso-vietnamese.png';
-import frappeBlueberry from '../assets/b1t1/frappe-blueberry.png';
-import frappeChocolate from '../assets/b1t1/frappe-chocolate.png';
-import frappeDarkMocha from '../assets/b1t1/frappe-dark-mocha.png';
-import frappeEspresso from '../assets/b1t1/frappe-espresso.png';
-import frappeStrawberry from '../assets/b1t1/frappe-strawberry.png';
-import fruitTeaBlueberry from '../assets/b1t1/fruit-tea-blueberry.png';
-import fruitTeaGreenApple from '../assets/b1t1/fruit-tea-green-apple.png';
-import fruitTeaLychee from '../assets/b1t1/fruit-tea-lychee.png';
-import fruitTeaPassionFruit from '../assets/b1t1/fruit-tea-passion-fruit.png';
-import fruitTeaStrawberry from '../assets/b1t1/fruit-tea-strawberry.png';
-import matchaDirtyMatcha from '../assets/b1t1/matcha-dirty-matcha.png';
-import matchaFrappe from '../assets/b1t1/matcha-frappe.png';
-import matchaLatte from '../assets/b1t1/matcha-latte.png';
-import waffleBiscoffCream from '../assets/b1t1/waffle-biscoff-cream.png';
-import waffleCaramel from '../assets/b1t1/waffle-caramel.png';
-import waffleChocolate from '../assets/b1t1/waffle-chocolate.png';
-import waffleCookiesAndCream from '../assets/b1t1/waffle-cookies-and-cream.png';
-import waffleMatchaCream from '../assets/b1t1/waffle-matcha-cream.png';
-import wafflePeanutButter from '../assets/b1t1/waffle-peanut-butter.png';
-import wafflePlain from '../assets/b1t1/waffle-plain.png';
-import waffleSmores from '../assets/b1t1/waffle-smores.png';
-import waffleStrawberry from '../assets/b1t1/waffle-strawberry.png';
+import chocolateClassic from '../assets/b1t1/optimized/chocolate-classic-400.webp';
+import chocolateWhite from '../assets/b1t1/optimized/chocolate-white-400.webp';
+import donutAlmondChoco from '../assets/b1t1/optimized/donut-almond-choco-400.webp';
+import donutMilkMatcha from '../assets/b1t1/optimized/donut-milk-matcha-400.webp';
+import donutStrawberry from '../assets/b1t1/optimized/donut-strawberry-400.webp';
+import espressoAmericano from '../assets/b1t1/optimized/espresso-americano-400.webp';
+import espressoBrownSugar from '../assets/b1t1/optimized/espresso-brown-sugar-400.webp';
+import espressoCaramelMacchiato from '../assets/b1t1/optimized/espresso-caramel-macchiato-400.webp';
+import espressoDarkMochaLatte from '../assets/b1t1/optimized/espresso-dark-mocha-latte-400.webp';
+import espressoFerreroLatte from '../assets/b1t1/optimized/espresso-ferrero-latte-400.webp';
+import espressoLatte from '../assets/b1t1/optimized/espresso-latte-400.webp';
+import espressoSpanishLatte from '../assets/b1t1/optimized/espresso-spanish-latte-400.webp';
+import espressoUbeLatte from '../assets/b1t1/optimized/espresso-ube-latte-400.webp';
+import espressoVietnamese from '../assets/b1t1/optimized/espresso-vietnamese-400.webp';
+import frappeBlueberry from '../assets/b1t1/optimized/frappe-blueberry-400.webp';
+import frappeChocolate from '../assets/b1t1/optimized/frappe-chocolate-400.webp';
+import frappeDarkMocha from '../assets/b1t1/optimized/frappe-dark-mocha-400.webp';
+import frappeEspresso from '../assets/b1t1/optimized/frappe-espresso-400.webp';
+import frappeStrawberry from '../assets/b1t1/optimized/frappe-strawberry-400.webp';
+import fruitTeaBlueberry from '../assets/b1t1/optimized/fruit-tea-blueberry-400.webp';
+import fruitTeaGreenApple from '../assets/b1t1/optimized/fruit-tea-green-apple-400.webp';
+import fruitTeaLychee from '../assets/b1t1/optimized/fruit-tea-lychee-400.webp';
+import fruitTeaPassionFruit from '../assets/b1t1/optimized/fruit-tea-passion-fruit-400.webp';
+import fruitTeaStrawberry from '../assets/b1t1/optimized/fruit-tea-strawberry-400.webp';
+import matchaDirtyMatcha from '../assets/b1t1/optimized/matcha-dirty-matcha-400.webp';
+import matchaFrappe from '../assets/b1t1/optimized/matcha-frappe-400.webp';
+import matchaLatte from '../assets/b1t1/optimized/matcha-latte-400.webp';
+import waffleBiscoffCream from '../assets/b1t1/optimized/waffle-biscoff-cream-400.webp';
+import waffleCaramel from '../assets/b1t1/optimized/waffle-caramel-400.webp';
+import waffleChocolate from '../assets/b1t1/optimized/waffle-chocolate-400.webp';
+import waffleCookiesAndCream from '../assets/b1t1/optimized/waffle-cookies-and-cream-400.webp';
+import waffleMatchaCream from '../assets/b1t1/optimized/waffle-matcha-cream-400.webp';
+import wafflePeanutButter from '../assets/b1t1/optimized/waffle-peanut-butter-400.webp';
+import wafflePlain from '../assets/b1t1/optimized/waffle-plain-400.webp';
+import waffleSmores from '../assets/b1t1/optimized/waffle-smores-400.webp';
+import waffleStrawberry from '../assets/b1t1/optimized/waffle-strawberry-400.webp';
+
+const largeImages = import.meta.glob('../assets/b1t1/optimized/*-800.webp', {
+  eager: true, query: '?url', import: 'default',
+});
 
 export const categories = [
   { id: 'all', label: 'All', icon: 'sparkles' },
@@ -234,4 +238,7 @@ export const products = [
     description: 'One box of 8 strawberry mini donuts', priceCentavos: 19800,
     categoryId: 'donuts', image: donutStrawberry, popularity: 36,
   },
-];
+].map((product) => ({
+  ...product,
+  imageLarge: largeImages[`../assets/b1t1/optimized/${product.id}-800.webp`],
+}));

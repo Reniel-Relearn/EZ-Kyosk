@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   base: '/EZ-Kyosk/',
   plugins: [react()],
+  build: { assetsInlineLimit: 0 },
   test: {
     include: ['src/**/*.test.{js,jsx}'],
   },

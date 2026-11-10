@@ -1,6 +1,7 @@
 import { useCart } from '../context/CartContext';
 import { calculateLineTotal, formatPHP } from '../domain/money';
 import { Icon } from './Icon';
+import { ProductImage } from './ProductImage';
 
 export function OrderReview({ onBack, onConfirm }) {
   const { items, itemCount, subtotalCentavos } = useCart();
@@ -31,7 +32,7 @@ export function OrderReview({ onBack, onConfirm }) {
           <div className="review-card__items">
             {items.map((item) => (
               <div className="review-item" key={item.id}>
-                <img alt="" src={item.image} />
+                <ProductImage wrapperClassName="review-item__image" src={item.image} priority />
                 <div>
                   <h3>{item.name}</h3>
                   <p>

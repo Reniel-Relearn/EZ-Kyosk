@@ -38,9 +38,10 @@ On systems where PowerShell script execution allows the npm shim, `npm` can be u
 npm run dev        Start the Vite development server
 npm run build      Create a production build
 npm run preview    Preview the production build
+npm run images:optimize Regenerate optimized menu images from the original PNGs
 npm test           Run Vitest unit tests
 npm run test:watch Run Vitest in watch mode
-npm run test:e2e   Run Playwright tests
+npm run test:e2e   Build production assets and run Playwright against that build
 ```
 
 Install Playwright's Chromium browser binary before running the local browser suite for the first time:

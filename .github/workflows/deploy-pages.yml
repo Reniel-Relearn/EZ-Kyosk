@@ -36,11 +36,8 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Run browser tests
+      - name: Build production site and run browser tests
         run: npm run test:e2e
-
-      - name: Build production site
-        run: npm run build
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6

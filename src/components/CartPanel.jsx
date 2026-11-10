@@ -1,6 +1,7 @@
 import { calculateLineTotal, formatPHP } from '../domain/money';
 import { useCart } from '../context/CartContext';
 import { Icon } from './Icon';
+import { ProductImage } from './ProductImage';
 
 export function CartPanel({ isOpen, onClose, onReview }) {
   const {
@@ -52,7 +53,7 @@ export function CartPanel({ isOpen, onClose, onReview }) {
           ) : (
             items.map((item) => (
               <article className="cart-item" key={item.id}>
-                <img alt="" className="cart-item__image" src={item.image} />
+                <ProductImage wrapperClassName="cart-item__image" src={item.image} priority />
                 <div className="cart-item__content">
                   <div className="cart-item__title-row">
                     <div>

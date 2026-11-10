@@ -25,7 +25,8 @@ describe('B1T1 menu catalog', () => {
     expect(new Set(products.map((product) => product.sourceId)).size).toBe(36);
 
     for (const product of products) {
-      expect(product.image).toMatch(/\/assets\/.*\.png$/);
+      expect(product.image).toMatch(/\/assets\/.*-400\.webp$/);
+      expect(product.imageLarge).toMatch(/\/assets\/.*-800\.webp$/);
       expect(product.name.length).toBeGreaterThan(0);
       expect(product.description.length).toBeGreaterThan(0);
       expect(validCategoryIds.has(product.categoryId)).toBe(true);
