@@ -38,7 +38,7 @@ Playwright covers the complete simulated ordering journey, touchscreen fullscree
 Latest verification results (including the QR presentation feature):
 
 - Vitest: 6 files, 47 tests passed
-- Playwright: 22 production-build tests passed, including image loading/failures, rendered QR decoding, fresh-device tracking, timing, category animations, fullscreen toggling, food-item coverage, and five-product cart scrolling
+- Playwright: 26 production-build tests passed, including category-scroll reset and cart-scroll preservation, image loading/failures, rendered QR decoding, fresh-device tracking, timing, category animations, fullscreen toggling, food-item coverage, and five-product cart scrolling
 - Responsive overflow checks: 1080 × 1920, 768 × 1024, and 430 × 900
 - Vite production build: passed
 - `git diff --check`: passed

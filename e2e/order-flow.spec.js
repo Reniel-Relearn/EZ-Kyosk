@@ -1,6 +1,42 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('B1T1 Takeaway Coffee ordering flow', () => {
+  for (const viewport of [{ width: 1080, height: 800 }, { width: 430, height: 900 }]) {
+    for (const reducedMotion of ['no-preference', 'reduce']) {
+      test(`resets category scrolling at ${viewport.width}x${viewport.height} with motion ${reducedMotion}`, async ({ page }) => {
+        await page.setViewportSize(viewport);
+        await page.emulateMedia({ reducedMotion });
+        await page.goto('/');
+
+        if (viewport.width === 1080) {
+          for (const name of ['Americano', 'Latte', 'Ube Latte', 'Brown Sugar', 'Dark Mocha Latte']) {
+            await page.getByRole('button', { name: `Add ${name} Solo to order` }).click();
+          }
+        }
+        const cartItems = page.locator('.cart-panel__items');
+        await cartItems.evaluate((element) => { element.scrollTop = element.scrollHeight; });
+        const cartScroll = await cartItems.evaluate((element) => element.scrollTop);
+        if (viewport.width === 1080) expect(cartScroll).toBeGreaterThan(0);
+
+        await page.getByRole('button', { name: 'Frappe', exact: true }).click();
+        const catalog = page.locator('.catalog');
+        await catalog.evaluate((element) => { element.scrollTop = element.scrollHeight; });
+        expect(await catalog.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
+
+        // Clicking the already-active category must not interrupt browsing.
+        const frappeScroll = await catalog.evaluate((element) => element.scrollTop);
+        await page.getByRole('button', { name: 'Frappe', exact: true }).click();
+        expect(await catalog.evaluate((element) => element.scrollTop)).toBe(frappeScroll);
+
+        await page.getByRole('button', { name: 'Fruit Tea', exact: true }).click();
+        await expect.poll(() => catalog.evaluate((element) => element.scrollTop)).toBe(0);
+        await expect(page.getByRole('heading', { name: 'Fruit Tea', exact: true })).toBeInViewport();
+        await expect(page.locator('.product-card')).toHaveCount(5);
+        expect(await cartItems.evaluate((element) => element.scrollTop)).toBe(cartScroll);
+      });
+    }
+  }
+
   test('animates cards only when changing categories', async ({ page }) => {
     await page.addInitScript(() => {
       window.cardAnimations = [];

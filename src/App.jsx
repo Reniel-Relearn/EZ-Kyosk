@@ -22,6 +22,7 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [categoryChange, setCategoryChange] = useState(0);
   const productGridRef = useRef(null);
+  const catalogRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState('popular');
   const [cartOpen, setCartOpen] = useState(false);
@@ -62,9 +63,9 @@ export default function App() {
   )?.label;
 
   useLayoutEffect(() => {
-    if (!categoryChange || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
+    if (!categoryChange) return;
+    if (catalogRef.current) catalogRef.current.scrollTop = 0;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const animations = Array.from(
       productGridRef.current?.querySelectorAll('.product-card') ?? [],
@@ -191,7 +192,7 @@ export default function App() {
           <div aria-hidden="true" className="category-nav__ornament" />
         </nav>
 
-        <main className="catalog">
+        <main className="catalog" ref={catalogRef}>
           <div className="catalog__intro">
             <p className="eyebrow">B1T1 Takeaway Coffee</p>
             <h1>What are you sipping today?</h1>
